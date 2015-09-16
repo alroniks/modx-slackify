@@ -37,7 +37,7 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'slackNotify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.1.0');
+define('PKG_VERSION', '0.1.4');
 define('PKG_RELEASE', 'alpha');
 
 //define('BUILD_SETTING_UPDATE', true);
@@ -61,7 +61,7 @@ $xpdo = xPDO::getInstance('db', [
     ]
 ]);
 
-$xpdo->setLogLevel(xPDO::LOG_LEVEL_FATAL);
+$xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget();
 
 /* define sources */
@@ -71,6 +71,7 @@ $sources = [
     'data' => $root . '_build/data/',
     'docs' => $root . 'docs/',
     'resolvers' => $root . '_build/resolvers/',
+    'validators' => $root . '_build/validators/',
     'core' => [
         'components/slacknotify/',
     ],
@@ -114,6 +115,12 @@ if (defined('BUILD_SETTING_UPDATE')) {
     }
 }
 
+$validators = [];
+array_push($validators, [
+    'type' => 'php',
+    'source' => $sources['validators'] . 'validate.phpversion.php'
+]);
+
 $resolvers = [];
 foreach ($sources['core'] as $file) {
     $directory = dirname($file);
@@ -128,34 +135,44 @@ array_push($resolvers, [
     'source' => $sources['resolvers'] . 'resolve.settings.php'
 ]);
 
-class msPayment extends xPDOObject {}
-$payment = new msPayment($xpdo);
-$payment->fromArray([
-    'id' => null,
-    'name' => 'BePaid',
-    'description' => null,
-    'price' => 0,
-    'logo' => null,
-    'rank' => 0,
-    'active' => 0,
-    'class' => 'BePaid',
-    'properties' => null
+class modCategory extends xPDOObject {}
+$category = new modCategory($xpdo);
+$category->fromArray([
+    'id' => 1,
+    'category' => PKG_NAME,
+    'parent' => 0,
 ]);
 
-$package->put($payment, [
-    xPDOTransport::UNIQUE_KEY => 'name',
+$package->put($category, [
+    xPDOTransport::UNIQUE_KEY => 'category',
     xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => false,
-    'package' => 'slackNotify',
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => [
+        'Plugins' => [
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+        ],
+        'PluginEvents' => [
+            xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => true,
+        ]
+    ],
+    xPDOTransport::NATIVE_KEY => true,
+    'package' => 'modx',
+    'validate' => $validators,
     'resolve' => $resolvers
 ]);
 
 $package->setAttribute('changelog', file_get_contents($sources['docs'] . 'changelog.txt'));
 $package->setAttribute('license', file_get_contents($sources['docs'] . 'license.txt'));
 $package->setAttribute('readme', file_get_contents($sources['docs'] . 'readme.txt'));
-$package->setAttribute('setup-options', [
-    'source' => $sources['build'] . 'setup.options.php'
-]);
+//$package->setAttribute('setup-options', [
+//    'source' => $sources['build'] . 'setup.options.php'
+//]);
 
 if ($package->pack()) {
     $xpdo->log(xPDO::LOG_LEVEL_INFO, "Package built");
