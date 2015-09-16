@@ -2,9 +2,9 @@
 
 class Field implements JsonSerializable
 {
-    private $title;
-    private $value;
-    private $short;
+    protected $title;
+    protected $value;
+    protected $short;
 
     /**
      * @param $title
@@ -34,12 +34,10 @@ class Field implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        $payload = [
+        return [
             'title' => $this->title,
             'value' => $this->value,
             'short' => (boolean) $this->short
         ];
-
-        return json_encode($payload);
     }
 }

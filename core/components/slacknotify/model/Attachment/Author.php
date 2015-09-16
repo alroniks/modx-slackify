@@ -2,9 +2,9 @@
 
 class Author implements JsonSerializable
 {
-    private $name;
-    private $link;
-    private $icon;
+    protected $name;
+    protected $link;
+    protected $icon;
 
     /**
      * @param string $name
@@ -34,16 +34,24 @@ class Author implements JsonSerializable
      */
     public function jsonSerialize()
     {
-        $payload = ['name' => $this->name];
+        return $this->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $payload = ['author_name' => $this->name];
 
         if ($this->link) {
-            $payload['link'] = $this->link;
+            $payload['author_link'] = $this->link;
         }
 
         if ($this->icon) {
-            $payload['icon'] = $this->icon;
+            $payload['author_icon'] = $this->icon;
         }
 
-        return json_encode($payload);
+        return $payload;
     }
 }

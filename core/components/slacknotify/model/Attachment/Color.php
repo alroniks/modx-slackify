@@ -1,11 +1,11 @@
 <?php
 
-class Color
+class Color implements JsonSerializable
 {
     /**
      * @var string
      */
-    private $color;
+    protected $color;
 
     /**
      * @param $color
@@ -31,6 +31,11 @@ class Color
      * @return string
      */
     public function __toString()
+    {
+        return $this->color;
+    }
+
+    public function jsonSerialize()
     {
         return $this->color;
     }
