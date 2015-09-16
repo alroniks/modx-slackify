@@ -1,0 +1,6 @@
+.idea
+.D_Store
+
+_packages/*/
+_packages/*.zip
+!_packages/.gitkeep

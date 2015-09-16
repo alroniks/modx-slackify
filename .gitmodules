@@ -1,0 +1,4 @@
+[submodule "_build/xpdo"]
+	path = _build/xpdo
+	url = https://github.com/modxcms/xpdo.git
+	branch = 2.x
