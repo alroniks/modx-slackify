@@ -35,9 +35,9 @@ set_time_limit(0);
 
 ini_set('date.timezone', 'Europe/Minsk');
 
-define('PKG_NAME', 'slackNotify');
+define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.1.4');
+define('PKG_VERSION', '0.1.6');
 define('PKG_RELEASE', 'alpha');
 
 //define('BUILD_SETTING_UPDATE', true);

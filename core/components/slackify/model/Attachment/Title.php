@@ -23,18 +23,32 @@
  * SOFTWARE.
  */
 
-if (!$object->xpdo && !$object->xpdo instanceof modX) {
-    return true;
-}
+class Title
+{
+    protected $title;
+    protected $link;
 
-switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-    case xPDOTransport::ACTION_INSTALL:
-    case xPDOTransport::ACTION_UPGRADE:
-        $object->xpdo->addExtensionPackage('slackify', '[[++core_path]]components/slackify/model/');
-        break;
-    case xPDOTransport::ACTION_UNINSTALL:
-        $object->xpdo->removeExtensionPackage('slackify');
-        break;
-}
+    /**
+     * @param $title
+     * @param string $link
+     */
+    public function __construct($title, $link = '')
+    {
+        $this->title = $title;
+        $this->link = $link;
+    }
 
-return true;
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $payload = ['title' => $this->title];
+
+        if ($this->link) {
+            $payload['title_link'] = $this->link;
+        }
+
+        return $payload;
+    }
+}

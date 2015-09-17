@@ -23,18 +23,58 @@
  * SOFTWARE.
  */
 
-if (!$object->xpdo && !$object->xpdo instanceof modX) {
-    return true;
-}
+class Author implements JsonSerializable
+{
+    protected $name;
+    protected $link;
+    protected $icon;
 
-switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-    case xPDOTransport::ACTION_INSTALL:
-    case xPDOTransport::ACTION_UPGRADE:
-        $object->xpdo->addExtensionPackage('slackify', '[[++core_path]]components/slackify/model/');
-        break;
-    case xPDOTransport::ACTION_UNINSTALL:
-        $object->xpdo->removeExtensionPackage('slackify');
-        break;
-}
+    /**
+     * @param string $name
+     * @param string $link
+     * @param string $icon
+     */
+    public function __construct($name, $link = '', $icon = '')
+    {
+        $this->name = $name;
+        $this->link = $link;
+        $this->icon = $icon;
+    }
 
-return true;
+    /**
+     * @param Author $that
+     * @return bool
+     */
+    public function equalsTo(Author $that)
+    {
+        return $this->name === $that->name
+            && $this->link === $that->link
+            && $this->icon === $that->icon;
+    }
+
+    /**
+     * @return string
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $payload = ['author_name' => $this->name];
+
+        if ($this->link) {
+            $payload['author_link'] = $this->link;
+        }
+
+        if ($this->icon) {
+            $payload['author_icon'] = $this->icon;
+        }
+
+        return $payload;
+    }
+}

@@ -23,18 +23,11 @@
  * SOFTWARE.
  */
 
-if (!$object->xpdo && !$object->xpdo instanceof modX) {
-    return true;
-}
+switch ($modx->event->name) {
+    case 'OnPageNotFound':
+        $msg = new Message('Page not found');
 
-switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-    case xPDOTransport::ACTION_INSTALL:
-    case xPDOTransport::ACTION_UPGRADE:
-        $object->xpdo->addExtensionPackage('slackify', '[[++core_path]]components/slackify/model/');
-        break;
-    case xPDOTransport::ACTION_UNINSTALL:
-        $object->xpdo->removeExtensionPackage('slackify');
-        break;
-}
+        (new Notifier())->send($msg);
 
-return true;
+    break;
+}

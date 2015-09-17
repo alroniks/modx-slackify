@@ -23,18 +23,43 @@
  * SOFTWARE.
  */
 
-if (!$object->xpdo && !$object->xpdo instanceof modX) {
-    return true;
-}
+class Color implements JsonSerializable
+{
+    /**
+     * @var string
+     */
+    protected $color;
 
-switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-    case xPDOTransport::ACTION_INSTALL:
-    case xPDOTransport::ACTION_UPGRADE:
-        $object->xpdo->addExtensionPackage('slackify', '[[++core_path]]components/slackify/model/');
-        break;
-    case xPDOTransport::ACTION_UNINSTALL:
-        $object->xpdo->removeExtensionPackage('slackify');
-        break;
-}
+    /**
+     * @param $color
+     */
+    public function __construct($color) {
+        if (!preg_match('/^#(?:[0-9a-fA-F]{3}){1,2}$/', $color)) {
+            throw new InvalidArgumentException('Invalid color format, should be like "#000000"');
+        }
 
-return true;
+        $this->color = $color;
+    }
+
+    /**
+     * @param Color $that
+     * @return bool
+     */
+    public function equalsTo(Color $that)
+    {
+        return $this->color === $that->color;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->color;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->color;
+    }
+}
