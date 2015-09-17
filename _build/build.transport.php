@@ -37,7 +37,7 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.1.6');
+define('PKG_VERSION', '0.2.0');
 define('PKG_RELEASE', 'alpha');
 
 //define('BUILD_SETTING_UPDATE', true);
@@ -94,6 +94,27 @@ if (file_exists($directory . $signature) && is_dir($directory . $signature)) {
 }
 
 $package = new xPDOTransport($xpdo, $signature, $directory);
+
+class modNamespace extends xPDOObject {}
+$namespace = new modNamespace($xpdo);
+$namespace->fromArray([
+    'id' => PKG_NAME_LOWER,
+    'name' => PKG_NAME_LOWER,
+    'path' => '{core_path}components/' . PKG_NAME_LOWER . '/',
+]);
+
+$package->put($namespace, [
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RESOLVE_FILES => true,
+    xPDOTransport::RESOLVE_PHP => true,
+    xPDOTransport::NATIVE_KEY => PKG_NAME_LOWER,
+    'namespace' => PKG_NAME_LOWER,
+    'package' => 'modx',
+    'resolve' => null,
+    'validate' => null
+]);
 
 /* load system settings */
 if (defined('BUILD_SETTING_UPDATE')) {
