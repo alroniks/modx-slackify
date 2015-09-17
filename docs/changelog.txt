@@ -1,6 +1,10 @@
 This file shows the changes in recent releases of Slackify.
 
-Slackify 0.1.5-alpha  (September 17, 2015)
+Slackify 0.2.0-alpha (September 17, 2015)
+====================================
+- Added Namespace generator to build script
+
+Slackify 0.1.5-alpha (September 17, 2015)
 ====================================
 - Created package builder
 - Created classes for Slack messages entities
