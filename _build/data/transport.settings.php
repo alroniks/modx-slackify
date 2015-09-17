@@ -27,7 +27,7 @@
  * System settings for package
  *
  * @author Ivan Klimchuk <ivan@klimchuk.com>
- * @package slackNotify
+ * @package Slackify
  * @subpackage build
  */
 
@@ -57,8 +57,8 @@ foreach ($list as $k => $v) {
     $setting = new modSystemSetting($xpdo);
     $setting->fromArray(array_merge(
         array(
-            'key' => 'slacknotify_' . $k,
-            'namespace' => 'slacknotify',
+            'key' => 'slackify_' . $k,
+            'namespace' => 'slackify',
             'editedon' => null,
         ), $v
     ), '', true, true);

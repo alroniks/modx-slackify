@@ -24,7 +24,7 @@
  */
 
 /**
- * slackNotify package builder
+ * Slackify package builder
  *
  * @author Ivan Klimchuk <ivan@klimchuk.com>
  * @package slackNotify
@@ -73,7 +73,7 @@ $sources = [
     'resolvers' => $root . '_build/resolvers/',
     'validators' => $root . '_build/validators/',
     'core' => [
-        'components/slacknotify/',
+        'components/slackify/',
     ],
 ];
 
@@ -170,9 +170,8 @@ $package->put($category, [
 $package->setAttribute('changelog', file_get_contents($sources['docs'] . 'changelog.txt'));
 $package->setAttribute('license', file_get_contents($sources['docs'] . 'license.txt'));
 $package->setAttribute('readme', file_get_contents($sources['docs'] . 'readme.txt'));
-//$package->setAttribute('setup-options', [
-//    'source' => $sources['build'] . 'setup.options.php'
-//]);
+$package->setAttribute('requires', ['php' => '>=5.4']);
+//$package->setAttribute('setup-options', ['source' => $sources['build'] . 'setup.options.php']);
 
 if ($package->pack()) {
     $xpdo->log(xPDO::LOG_LEVEL_INFO, "Package built");

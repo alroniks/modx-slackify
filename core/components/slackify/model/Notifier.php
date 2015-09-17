@@ -47,17 +47,17 @@ class Notifier
 
     public function send(Message $message)
     {
-        $entrypoint = $this->modx->getOption('slacknotify_entrypoint', null, false);
+        $entrypoint = $this->modx->getOption('slackify_entrypoint', null, false);
         if (!$entrypoint) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Entry point for SlackNotify not defined in system settings');
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Entry point for Slackify not defined in system settings');
         }
 
         if (!$message->getChannel()) {
-            $message->setChannel($this->modx->getOption('slacknotify_channel', null, '#general'));
+            $message->setChannel($this->modx->getOption('slackify_channel', null, '#general'));
         }
 
         if (!$message->getUsername()) {
-            $username = $this->modx->getOption('slacknotify_username', null, $this->modx->getOption('site_name'));
+            $username = $this->modx->getOption('slackify_username', null, $this->modx->getOption('site_name'));
             $message->setUsername($username);
         }
 

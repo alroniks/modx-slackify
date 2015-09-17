@@ -27,7 +27,7 @@
  * System settings resolver
  *
  * @author Ivan Klimchuk <ivan@klimchuk.com>
- * @package slacknotify
+ * @package Slackify
  * @subpackage build
  */
 
