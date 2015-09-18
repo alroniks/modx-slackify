@@ -23,3 +23,13 @@
  * SOFTWARE.
  */
 
+switch ($modx->event->name) {
+    case 'OnPageNotFound':
+        $modx->getService('slackify');
+
+        $msg = new Message('Page not found');
+
+        (new Slackify($modx))->send($msg);
+
+    break;
+}

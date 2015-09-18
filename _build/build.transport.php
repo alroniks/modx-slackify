@@ -37,7 +37,7 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.3.0');
+define('PKG_VERSION', '0.4.4');
 define('PKG_RELEASE', 'alpha');
 
 require_once 'xpdo/xpdo/xpdo.class.php';
@@ -62,11 +62,48 @@ $xpdo = xPDO::getInstance('db', [
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget();
 
+class modNamespace extends xPDOObject {}
+class modCategory extends xPDOObject {
+    public function getFKDefinition($alias)
+    {
+        $aggregates = [
+            'Plugins' => [
+                'class' => 'modPlugin',
+                'local' => 'id',
+                'foreign' => 'category',
+                'cardinality' => 'many',
+                'owner' => 'local',
+            ]
+        ];
+
+        return isset($aggregates[$alias]) ? $aggregates[$alias] : [];
+    }
+}
+class modSystemSetting extends xPDOObject {}
+class modPlugin extends xPDOObject {
+    public function getFKDefinition($alias)
+    {
+        $aggregates = [
+            'PluginEvents' => [
+                'class' => 'modPluginEvent',
+                'local' => 'id',
+                'foreign' => 'pluginid',
+                'cardinality' => 'one',
+                'owner' => 'local',
+            ]
+        ];
+
+        return isset($aggregates[$alias]) ? $aggregates[$alias] : [];
+    }
+}
+class modPluginEvent extends xPDOObject {}
+
 /* define sources */
 $root = dirname(dirname(__FILE__)) . '/';
 $sources = [
     'build' => $root . '_build/',
     'data' => $root . '_build/data/',
+    'plugins' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/',
     'docs' => $root . 'docs/',
     'resolvers' => $root . '_build/resolvers/',
     'validators' => $root . '_build/validators/',
@@ -80,7 +117,6 @@ $signature = join('-', [PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE]);
 $directory = __DIR__ . '/../../../core/packages/'; // local place
 $filename = $directory . $signature . '.transport.zip';
 
-/* remove the package if it's already been made */
 if (file_exists($filename)) {
     unlink($filename);
 }
@@ -93,7 +129,6 @@ if (file_exists($directory . $signature) && is_dir($directory . $signature)) {
 
 $package = new xPDOTransport($xpdo, $signature, $directory);
 
-class modNamespace extends xPDOObject {}
 $namespace = new modNamespace($xpdo);
 $namespace->fromArray([
     'id' => PKG_NAME_LOWER,
@@ -151,13 +186,17 @@ array_push($resolvers, [
     'source' => $sources['resolvers'] . 'resolve.settings.php'
 ]);
 
-class modCategory extends xPDOObject {}
 $category = new modCategory($xpdo);
 $category->fromArray([
     'id' => 1,
     'category' => PKG_NAME,
     'parent' => 0,
 ]);
+
+$plugins = include $sources['data'] . 'transport.plugins.php';
+if (is_array($plugins)) {
+    $category->addMany($plugins, 'Plugins');
+}
 
 $package->put($category, [
     xPDOTransport::UNIQUE_KEY => 'category',
@@ -170,11 +209,13 @@ $package->put($category, [
             xPDOTransport::UNIQUE_KEY => 'name',
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RELATED_OBJECTS => true
         ],
         'PluginEvents' => [
-            xPDOTransport::UNIQUE_KEY => ['pluginid','event'],
+            xPDOTransport::UNIQUE_KEY => ['pluginid', 'event'],
             xPDOTransport::PRESERVE_KEYS => true,
             xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RELATED_OBJECTS => true
         ]
     ],
     xPDOTransport::NATIVE_KEY => true,

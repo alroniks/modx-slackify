@@ -30,7 +30,7 @@ include_once 'Attachment/Title.php';
 include_once 'Attachment.php';
 include_once 'Message.php';
 
-class Notifier
+class Slackify
 {
     private $modx;
 

@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.4.4-alpha (September 18, 2015)
+========================================
+- Added plugins config to builder
+
 Slackify 0.3.0-alpha (September 18, 2015)
 ========================================
 - Added new system settings to package

@@ -70,17 +70,15 @@ $list = [
     ]
 ];
 
-class modSystemSetting extends xPDOObject {}
-
 $settings = [];
 foreach ($list as $k => $v) {
     $setting = new modSystemSetting($xpdo);
     $setting->fromArray(array_merge(
-        array(
+        [
             'key' => 'slackify_' . $k,
             'namespace' => 'slackify',
             'editedon' => null,
-        ), $v
+        ], $v
     ), '', true, true);
 
     $settings[] = $setting;

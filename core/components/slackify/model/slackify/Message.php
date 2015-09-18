@@ -31,7 +31,7 @@ class Message implements JsonSerializable
     protected $icon = null;
     protected $attachments = [];
 
-    protected $config;
+    protected $config = [];
 
     const ICON_URL = 'icon_url';
     const ICON_EMOJI = 'icon_emoji';
