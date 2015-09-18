@@ -48,8 +48,13 @@ class Slackify
             return;
         }
 
+        $sender = $this->modx->getOption('slackify_username', null, $this->modx->getOption('site_name', null, ''));
+        if (!$sender) {
+            $sender = $this->modx->getOption('site_name', null, '');
+        }
+
         $config = [
-            'username' => $this->modx->getOption('slackify_username', null, $this->modx->getOption('site_name')),
+            'username' => $sender,
             'icon' => $this->modx->getOption('slackify_icon', null, ''),
             'link_names' => $this->modx->getOption('slackify_link_names', null, false),
             'unfurl_links' => $this->modx->getOption('slackify_unfurl_links', null, false),
