@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.4.5-alpha (September 18, 2015)
+========================================
+- Fixed minor bugs with configuration of message class
+
 Slackify 0.4.4-alpha (September 18, 2015)
 ========================================
 - Added plugins config to builder

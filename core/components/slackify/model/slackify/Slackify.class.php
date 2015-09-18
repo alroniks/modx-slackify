@@ -49,11 +49,13 @@ class Slackify
         }
 
         $config = [
+            'username' => $this->modx->getOption('slackify_username', null, $this->modx->getOption('site_name')),
+            'icon' => $this->modx->getOption('slackify_icon', null, ''),
             'link_names' => $this->modx->getOption('slackify_link_names', null, false),
-            'unfurl_links' => $this->modx->getOption('slackify_link_names', null, false),
+            'unfurl_links' => $this->modx->getOption('slackify_unfurl_links', null, false),
             'unfurl_media' => $this->modx->getOption('slackify_unfurl_media', null, true),
-            'allow_markdown'=> $this->modx->getOption('slackify_link_names', null, true),
-            'markdown_in_attachments' => $this->modx->getOption('slackify_link_names', null, '')
+            'allow_markdown'=> $this->modx->getOption('slackify_allow_markdown', null, true),
+            'markdown_in_attachments' => $this->modx->getOption('slackify_markdown_in_attachments', null, '')
         ];
 
         $message->setConfig(array_merge($config, $message->getConfig()));

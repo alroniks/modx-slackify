@@ -75,6 +75,15 @@ class Message implements JsonSerializable
         if (isset($config['markdown_in_attachments'])) {
             $this->config['markdown_in_attachments'] = $config['markdown_in_attachments'];
         }
+
+        if (isset($config['username']) && $config['username'] && !$this->username) {
+            $this->username = $config['username'];
+            $this->from($config['username']);
+        }
+
+        if (isset($config['icon']) && $config['icon'] && !$this->icon) {
+            $this->withIcon($config['icon']);
+        }
     }
 
     public function from($username)
