@@ -40,8 +40,6 @@ define('PKG_NAME_LOWER', strtolower(PKG_NAME));
 define('PKG_VERSION', '0.3.0');
 define('PKG_RELEASE', 'alpha');
 
-define('BUILD_SETTING_UPDATE', true);
-
 require_once 'xpdo/xpdo/xpdo.class.php';
 require_once 'xpdo/xpdo/transport/xpdotransport.class.php';
 
@@ -116,23 +114,20 @@ $package->put($namespace, [
     'validate' => null
 ]);
 
-/* load system settings */
-if (defined('BUILD_SETTING_UPDATE')) {
-    $settings = include $sources['data'] . 'transport.settings.php';
-    if (!is_array($settings)) {
-        $xpdo->log(XPDO::LOG_LEVEL_ERROR, 'Could not package in settings.');
-    } else {
-        foreach ($settings as $setting) {
-            $package->put($setting, [
-                xPDOTransport::UNIQUE_KEY => 'key',
-                xPDOTransport::PRESERVE_KEYS => true,
-                xPDOTransport::UPDATE_OBJECT => BUILD_SETTING_UPDATE,
-                'class' => 'modSystemSetting',
-                'resolve' => null,
-                'validate' => null,
-                'package' => 'modx',
-            ]);
-        }
+$settings = include $sources['data'] . 'transport.settings.php';
+if (!is_array($settings)) {
+    $xpdo->log(XPDO::LOG_LEVEL_ERROR, 'Could not package in settings.');
+} else {
+    foreach ($settings as $setting) {
+        $package->put($setting, [
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => true,
+            'class' => 'modSystemSetting',
+            'resolve' => null,
+            'validate' => null,
+            'package' => 'modx',
+        ]);
     }
 }
 
