@@ -23,12 +23,20 @@
  * SOFTWARE.
  */
 
+/**
+ * PHP version checker for MODX less then 2.4
+ *
+ * @author Ivan Klimchuk <ivan@klimchuk.com>
+ * @package Slackify
+ * @subpackage build
+ */
+
 if (!$object->xpdo) {
     return false;
 }
 
 if (!version_compare(PHP_VERSION, '5.4', '>=')) {
-    $object->xpdo->log(modX::LOG_LEVEL_ERROR, 'Invalid php version. Should be grather or equal 5.4');
+    $object->xpdo->log(modX::LOG_LEVEL_ERROR, 'Invalid php version. Minimal supported version – 5.4');
 
     return false;
 }

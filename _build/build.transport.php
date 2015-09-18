@@ -37,10 +37,10 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.2.0');
+define('PKG_VERSION', '0.3.0');
 define('PKG_RELEASE', 'alpha');
 
-//define('BUILD_SETTING_UPDATE', true);
+define('BUILD_SETTING_UPDATE', true);
 
 require_once 'xpdo/xpdo/xpdo.class.php';
 require_once 'xpdo/xpdo/transport/xpdotransport.class.php';
@@ -192,7 +192,7 @@ $package->setAttribute('changelog', file_get_contents($sources['docs'] . 'change
 $package->setAttribute('license', file_get_contents($sources['docs'] . 'license.txt'));
 $package->setAttribute('readme', file_get_contents($sources['docs'] . 'readme.txt'));
 $package->setAttribute('requires', ['php' => '>=5.4']);
-//$package->setAttribute('setup-options', ['source' => $sources['build'] . 'setup.options.php']);
+$package->setAttribute('setup-options', ['source' => $sources['build'] . 'setup.options.php']);
 
 if ($package->pack()) {
     $xpdo->log(xPDO::LOG_LEVEL_INFO, "Package built");

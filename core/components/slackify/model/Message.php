@@ -47,41 +47,17 @@ class Message implements JsonSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getChannel()
-    {
-        return $this->channel;
-    }
-
-    /**
-     * @param $channel
-     */
-    public function setChannel($channel)
-    {
-        $this->channel = $channel;
-    }
-
-    /**
      * @return mixed
      */
-    public function getUsername()
+    public function getConfig()
     {
-        return $this->username;
-    }
-
-    /**
-     * @param $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
+        return $this->config;
     }
 
     /**
      * @param array $config
      */
-    protected function setConfig(array $config)
+    public function setConfig(array $config)
     {
         $allowed = [
             'link_names',

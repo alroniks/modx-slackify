@@ -32,36 +32,31 @@ include_once 'Message.php';
 
 class Notifier
 {
-//    private $modx;
+    private $modx;
 
-//    public function __construct(modX $modx)
-//    {
-////        $this->modx =& $modx;
-//
-//        // entrypoint
-//        // channel// to
-//        // from
-//        // icon
-//
-//    }
+    public function __construct(modX $modx)
+    {
+        $this->modx =& $modx;
+    }
 
     public function send(Message $message)
     {
         $entrypoint = $this->modx->getOption('slackify_entrypoint', null, false);
         if (!$entrypoint) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, 'Entry point for Slackify not defined in system settings');
+
+            return;
         }
 
-        if (!$message->getChannel()) {
-            $message->setChannel($this->modx->getOption('slackify_channel', null, '#general'));
-        }
+        $config = [
+            'link_names' => $this->modx->getOption('slackify_link_names', null, false),
+            'unfurl_links' => $this->modx->getOption('slackify_link_names', null, false),
+            'unfurl_media' => $this->modx->getOption('slackify_unfurl_media', null, true),
+            'allow_markdown'=> $this->modx->getOption('slackify_link_names', null, true),
+            'markdown_in_attachments' => $this->modx->getOption('slackify_link_names', null, '')
+        ];
 
-        if (!$message->getUsername()) {
-            $username = $this->modx->getOption('slackify_username', null, $this->modx->getOption('site_name'));
-            $message->setUsername($username);
-        }
-
-        // TODO: added abbility reset config options, if not set
+        $message->setConfig(array_merge($config, $message->getConfig()));
 
         $fields = ['payload' => json_encode($message)];
 

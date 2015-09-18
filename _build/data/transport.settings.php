@@ -47,6 +47,26 @@ $list = [
     'icon' => [
         'xtype' => 'textfield',
         'value' => ''
+    ],
+    'link_names' => [
+        'xtype' => 'combo-boolean',
+        'value' => false
+    ],
+    'unfurl_links' => [
+        'xtype' => 'combo-boolean',
+        'value' => false
+    ],
+    'unfurl_media' => [
+        'xtype' => 'combo-boolean',
+        'value' => true
+    ],
+    'allow_markdown' => [
+        'xtype' => 'combo-boolean',
+        'value' => true
+    ],
+    'markdown_in_attachments' => [
+        'xtype' => 'textfield',
+        'value' => ''
     ]
 ];
 
@@ -67,27 +87,3 @@ foreach ($list as $k => $v) {
 }
 
 return $settings;
-
-
-//All settings are optional, but are a convenient way of specifying how the client should behave beyond the defaults.
-
-
-//link_names: whether names like @regan or #accounting should be linked
-//bool
-//default: false
-
-//unfurl_links: whether Slack should unfurl text-based URLs
-//bool
-//default: false
-
-//unfurl_media: whether Slack should unfurl media-based URLs
-//bool
-//default: true
-
-//allow_markdown: whether Markdown should be parsed in messages
-//bool
-//default: true
-
-//markdown_in_attachments: which attachment fields should have Markdown parsed
-//array
-//default: []

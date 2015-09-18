@@ -31,38 +31,44 @@
  * @subpackage build
  */
 
-if ($object->xpdo) {
-    $modx =& $object->xpdo;
+if (!$object->xpdo && !$object->xpdo instanceof modX) {
+    return true;
+}
 
-    switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-        case xPDOTransport::ACTION_INSTALL:
-            if (!empty($options['bepaid-store-id'])) {
-                if (!$tmp = $modx->getObject('modSystemSetting', array('key' => 'ms2_payment_bepaid_store_id'))) {
-                    $tmp = $modx->newObject('modSystemSetting');
-                }
-                $tmp->fromArray(array(
-                    'namespace' => 'minishop2',
-                    'area' => 'ms2_payment_bepaid',
-                    'xtype' => 'textfield',
-                    'value' => $options['bepaid-store-id'],
-                    'key' => 'ms2_payment_bepaid_store_id',
-                ), '', true, true);
-                $tmp->save();
+switch ($options[xPDOTransport::PACKAGE_ACTION]) {
+    case xPDOTransport::ACTION_INSTALL:
+        if (!empty($options['slackify-entry-point'])) {
+            if (!$ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_entrypoint'])) {
+                $ss = $object->xpdo->newObject('modSystemSetting');
             }
+            $ss->fromArray([
+                'namespace' => 'slackify',
+                'xtype' => 'textfield',
+                'value' => $options['slackify-entry-point'],
+                'key' => 'slackify_entrypoint',
+            ], '', true, true);
+            $ss->save();
+        }
+        if (!empty($options['slackify-channel'])) {
+            if (!$ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_channel'])) {
+                $ss = $object->xpdo->newObject('modSystemSetting');
+            }
+            $ss->fromArray([
+                'namespace' => 'slackify',
+                'xtype' => 'textfield',
+                'value' => $options['slackify-channel'],
+                'key' => 'slackify_channel',
+            ], '', true, true);
+            $ss->save();
+        }
+        break;
 
-            break;
+    case xPDOTransport::ACTION_UPGRADE:
+        break;
 
-        case xPDOTransport::ACTION_UPGRADE:
-            break;
-
-        // TODO: Should be replace to valid data
-        case xPDOTransport::ACTION_UNINSTALL:
-//            $modelPath = $modx->getOption('minishop2.core_path', null, $modx->getOption('core_path') . 'components/minishop2/') . 'model/';
-//            $modx->addPackage('minishop2', $modelPath);
-//            $modx->removeCollection('msPayment', array('class' => 'WebPay'));
-//            $modx->removeCollection('modSystemSetting', array('key:LIKE' => 'ms2\_payment\_bepaid\_%'));
-            break;
-    }
+    case xPDOTransport::ACTION_UNINSTALL:
+        $object->xpdo->removeCollection('modSystemSetting', ['key:LIKE' => 'slackify\_%']);
+        break;
 }
 
 return true;

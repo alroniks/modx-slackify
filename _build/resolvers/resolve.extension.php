@@ -23,6 +23,14 @@
  * SOFTWARE.
  */
 
+/**
+ * Core extensions resolver
+ *
+ * @author Ivan Klimchuk <ivan@klimchuk.com>
+ * @package Slackify
+ * @subpackage build
+ */
+
 if (!$object->xpdo && !$object->xpdo instanceof modX) {
     return true;
 }
