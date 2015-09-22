@@ -37,7 +37,7 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.4.8');
+define('PKG_VERSION', '0.4.9');
 define('PKG_RELEASE', 'alpha');
 
 require_once 'xpdo/xpdo/xpdo.class.php';
@@ -177,10 +177,10 @@ foreach ($sources['core'] as $file) {
         'target' => "return MODX_CORE_PATH . '$directory/';"
     ]);
 }
-array_push($resolvers, [
-    'type' => 'php',
-    'source' => $sources['resolvers'] . 'resolve.settings.php'
-]);
+array_push($resolvers,
+    ['type' => 'php', 'source' => $sources['resolvers'] . 'resolve.extension.php'],
+    ['type' => 'php', 'source' => $sources['resolvers'] . 'resolve.settings.php']
+);
 
 $category = new modCategory($xpdo);
 $category->fromArray([
