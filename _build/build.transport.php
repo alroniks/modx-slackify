@@ -37,7 +37,7 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.4.6');
+define('PKG_VERSION', '0.4.8');
 define('PKG_RELEASE', 'alpha');
 
 require_once 'xpdo/xpdo/xpdo.class.php';
@@ -150,20 +150,16 @@ $package->put($namespace, [
 ]);
 
 $settings = include $sources['data'] . 'transport.settings.php';
-if (!is_array($settings)) {
-    $xpdo->log(XPDO::LOG_LEVEL_ERROR, 'Could not package in settings.');
-} else {
-    foreach ($settings as $setting) {
-        $package->put($setting, [
-            xPDOTransport::UNIQUE_KEY => 'key',
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => true,
-            'class' => 'modSystemSetting',
-            'resolve' => null,
-            'validate' => null,
-            'package' => 'modx',
-        ]);
-    }
+foreach ($settings as $setting) {
+    $package->put($setting, [
+        xPDOTransport::UNIQUE_KEY => 'key',
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => true,
+        'class' => 'modSystemSetting',
+        'resolve' => null,
+        'validate' => null,
+        'package' => 'modx',
+    ]);
 }
 
 $validators = [];

@@ -37,27 +37,27 @@ if (!$object->xpdo && !$object->xpdo instanceof modX) {
 
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-        if (!empty($options['slackify-entry-point'])) {
-            if (!$ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_entrypoint'])) {
-                $ss = $object->xpdo->newObject('modSystemSetting');
-            }
+        if (isset($options['slackify_entrypoint'])) {
+            $ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_entrypoint'])
+                ?: $object->xpdo->newObject('modSystemSetting');
+
             $ss->fromArray([
                 'namespace' => 'slackify',
                 'xtype' => 'textfield',
-                'value' => $options['slackify-entry-point'],
                 'key' => 'slackify_entrypoint',
+                'value' => $options['slackify_entrypoint'],
             ], '', true, true);
             $ss->save();
         }
-        if (!empty($options['slackify-channel'])) {
-            if (!$ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_channel'])) {
-                $ss = $object->xpdo->newObject('modSystemSetting');
-            }
+        if (isset($options['slackify_channel'])) {
+            $ss = $object->xpdo->getObject('modSystemSetting', ['key' => 'slackify_channel'])
+                ?: $object->xpdo->newObject('modSystemSetting');
+
             $ss->fromArray([
                 'namespace' => 'slackify',
                 'xtype' => 'textfield',
-                'value' => $options['slackify-channel'],
                 'key' => 'slackify_channel',
+                'value' => $options['slackify_channel'],
             ], '', true, true);
             $ss->save();
         }

@@ -74,10 +74,10 @@ $output = <<<HTML
         <h4>{$translate['title']}</h4>
 
         <label for="slackify-entry-point">{$translate['entrypoint']}</label>
-        <input type="text" name="slackify-entry-point" id="slackify-entry-point" width="300" value="" />
+        <input type="text" name="slackify_entrypoint" id="slackify-entry-point" width="300" value="" />
 
         <label for="slackify-channel">{$translate['channel']}</label>
-        <input type="text" name="slackify-channel" id="slackify-channel" width="300" value="#general" />
+        <input type="text" name="slackify_channel" id="slackify-channel" width="300" value="#general" />
 
         <small>{$translate['info']}</small>
     </div>
