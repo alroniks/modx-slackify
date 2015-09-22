@@ -31,9 +31,11 @@ class Attachment implements JsonSerializable
      * @param $text
      * @param string $pretext
      */
-    public function __construct($text, $pretext = '')
+    public function __construct($text = '', $pretext = '')
     {
-        $this->attributes['text'] = (string) $text;
+        if ($text) {
+            $this->attributes['text'] = (string)$text;
+        }
 
         if ($pretext) {
             $this->attributes['pretext'] = (string) $pretext;

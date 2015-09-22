@@ -37,8 +37,8 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.4.10');
-define('PKG_RELEASE', 'alpha');
+define('PKG_VERSION', '0.5.0');
+define('PKG_RELEASE', 'beta');
 
 require_once 'xpdo/xpdo/xpdo.class.php';
 require_once 'xpdo/xpdo/transport/xpdotransport.class.php';
@@ -204,13 +204,13 @@ $package->put($category, [
         'Plugins' => [
             xPDOTransport::UNIQUE_KEY => 'name',
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::RELATED_OBJECTS => true
         ],
         'PluginEvents' => [
             xPDOTransport::UNIQUE_KEY => ['pluginid', 'event'],
             xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::RELATED_OBJECTS => true
         ]
     ],

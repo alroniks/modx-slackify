@@ -26,9 +26,8 @@
 $plugins = [];
 
 $list = [
-    'OnPageNotFoundSlackify' => [
-        'file' => 'OnPageNotFoundSlackify',
-        'description' => 'desc 404',
+    'PageNotFoundSlackify' => [
+        'description' => 'This plugin sends message to defined channel in Slack when 404 error occurs on site.',
         'events' => [
             'OnPageNotFound'
         ]
@@ -42,9 +41,9 @@ foreach ($list as $k => $v) {
         'name' => $k,
         'category' => 0,
         'description' => $v['description'],
-        'plugincode' => trim(str_replace(['<?php', '?>'], '', file_get_contents($sources['plugins'] . $v['file'] . '.php'))),
+        'plugincode' => trim(str_replace(['<?php', '?>'], '', file_get_contents($sources['plugins'] . $k . '.php'))),
         'static' => true,
-        'static_file' => 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/' . $v['file'] . '.php',
+        'static_file' => 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/' . $k . '.php',
         'source' => 1,
         'property_preprocess' => 0,
         'editor_type' => 0,

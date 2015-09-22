@@ -55,7 +55,6 @@ Contributing
 
 TODO:
 
- - добавить плагин для NotFound - v0.5
  - добавить плагин для miniShop2 - v0.6
  - добавить плагин для Tickets - v0.7
  - ?

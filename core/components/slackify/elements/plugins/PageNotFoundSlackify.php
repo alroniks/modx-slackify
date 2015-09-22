@@ -25,11 +25,22 @@
 
 switch ($modx->event->name) {
     case 'OnPageNotFound':
-        $modx->getService('slackify');
+        $slackify = $modx->getService('slackify');
 
-        $msg = new Message('Page not found');
+        $a = new Attachment();
+        $a->setPretext('This is an automated notification of a 404 error that has occured on the site.');
 
-        (new Slackify($modx))->send($msg);
+        $a->setColor(new Color('#FF0000'));
+        $a->setTitle(new Title($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+        $a->setText('Requested url not found and returns 404 error');
 
+        $a->addField(new Field('When', (new DateTime())->format('d M Y - G:i:s'), true));
+        $a->addField(new Field('Visitor IP', $_SERVER['REMOTE_ADDR'], true));
+        $a->addField(new Field('User agent', $_SERVER['HTTP_USER_AGENT']));
+
+        $message = new Message('*Error 404*, Page not found');
+        $message->attach($a);
+
+        $slackify->send($message);
     break;
 }
