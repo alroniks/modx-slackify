@@ -54,7 +54,8 @@ class Slackify
         }
 
         $config = [
-            'username' => $sender,
+            'sender' => $sender,
+            'channel' => $this->modx->getOption('slackify_channel', null, '#general'),
             'icon' => $this->modx->getOption('slackify_icon', null, ''),
             'link_names' => $this->modx->getOption('slackify_link_names', null, false),
             'unfurl_links' => $this->modx->getOption('slackify_unfurl_links', null, false),

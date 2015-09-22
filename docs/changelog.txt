@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.4.10-alpha (September 23, 2015)
+========================================
+- Improved Message class for support icon and channel override
+
 Slackify 0.4.9-alpha (September 22, 2015)
 ========================================
 - Added missed extension resolver

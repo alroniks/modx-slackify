@@ -26,8 +26,8 @@
 class Message implements JsonSerializable
 {
     protected $text;
-    protected $channel;
-    protected $username;
+    protected $to;
+    protected $from;
     protected $icon = null;
     protected $attachments = [];
 
@@ -76,26 +76,30 @@ class Message implements JsonSerializable
             $this->config['markdown_in_attachments'] = $config['markdown_in_attachments'];
         }
 
-        if (isset($config['username']) && $config['username'] && !$this->username) {
-            $this->username = $config['username'];
-            $this->from($config['username']);
+        if (isset($config['sender']) && $config['sender'] && !$this->from) {
+            $this->from($config['sender']);
+        }
+
+        if (isset($config['channel']) && $config['channel'] && !$this->to) {
+            $this->to($config['channel']);
         }
 
         if (isset($config['icon']) && $config['icon'] && !$this->icon) {
-            $this->withIcon($config['icon']);
+            $this->withIcon($config['icon'],
+                preg_match('/:[a-z0-9_]+:/i', $config['icon']) ? self::ICON_EMOJI : self::ICON_URL);
         }
     }
 
-    public function from($username)
+    public function from($from)
     {
-        $this->username = $username;
+        $this->from = $from;
 
         return $this;
     }
 
-    public function to($channel)
+    public function to($to)
     {
-        $this->channel = $channel;
+        $this->to = $to;
 
         return $this;
     }
@@ -128,12 +132,12 @@ class Message implements JsonSerializable
     {
         $payload = ['text' => $this->text];
 
-        if ($this->username) {
-            $payload['username'] = $this->username;
+        if ($this->from) {
+            $payload['username'] = $this->from;
         }
 
-        if ($this->channel) {
-            $payload['channel'] = $this->channel;
+        if ($this->to) {
+            $payload['channel'] = $this->to;
         }
 
         if ($this->icon) {
