@@ -10,6 +10,10 @@ for send any type of messages to Slack channels and users.
 
 Extra will be available in the official repository and in the modstore.pro, but deploy can take some time, so latest versions of package always available in [releases](/releases).
 
+### Required (Important)
+
+- php >= 5.4
+
 ## Classes
 
 Most of the classes from this extra are follow value-object design pattern. Class Message accumulates in self-build message payload logic.
