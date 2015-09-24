@@ -1,6 +1,12 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.6.2-beta (September 24, 2015)
+========================================
+- Added class Link for generates valid links for Slack
+- Added plugin NewCommentTicketsSlackify for send notifies when new comments added
+
 Slackify 0.5.0-beta (September 23, 2015)
+========================================
 - Added plugin for notify to Slack when 404 error happens
 
 Slackify 0.4.10-alpha (September 23, 2015)

@@ -23,3 +23,24 @@
  * SOFTWARE.
  */
 
+class Link
+{
+    protected $url;
+    protected $title = '';
+
+    public function __construct($url, $title = '')
+    {
+        $this->url = $url;
+        $this->title = $title;
+    }
+
+    public function __toString()
+    {
+        $link = $this->url;
+        if ($this->title) {
+            $link .= '|' . $this->title;
+        }
+
+        return str_replace('{link}', $link, '<{link}>');
+    }
+}

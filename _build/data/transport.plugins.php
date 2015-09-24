@@ -27,9 +27,15 @@ $plugins = [];
 
 $list = [
     'PageNotFoundSlackify' => [
-        'description' => 'This plugin sends message to defined channel in Slack when 404 error occurs on site.',
+        'description' => 'This plugin sends messages to defined channel in Slack when 404 error occurs on site.',
         'events' => [
             'OnPageNotFound'
+        ]
+    ],
+    'NewCommentTicketsSlackify' => [
+        'description' => 'This plugin sends messages to defined channel in Slack when somebody add new comment to a ticket.',
+        'events' => [
+            'OnCommentSave'
         ]
     ]
 ];

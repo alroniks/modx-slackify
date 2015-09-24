@@ -27,6 +27,7 @@ include_once 'Attachment/Author.php';
 include_once 'Attachment/Color.php';
 include_once 'Attachment/Field.php';
 include_once 'Attachment/Title.php';
+include_once 'Attachment/Link.php';
 include_once 'Attachment.php';
 include_once 'Message.php';
 

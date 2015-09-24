@@ -58,8 +58,8 @@ class Field implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'title' => $this->title,
-            'value' => $this->value,
+            'title' => (string) $this->title,
+            'value' => (string) $this->value,
             'short' => (boolean) $this->short
         ];
     }
