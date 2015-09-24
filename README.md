@@ -209,6 +209,10 @@ Also, you may change a path to directory for built packages, just redefine varia
 
 In classes I use type hinting in methods, like this `public function addField(Field $field) {}`, so if you pass to this function simple string you will get error and your script will not work. On the real site, it can looks as white screen or site can have strange behavior. If it occurs, please, at first check error log in MODX and fix the problem described there.
 
+## Author
+
+- [Ivan Klimchuk](http://klimchuk.com), [Alroniks](https://github.com/Alroniks)
+
 ## License
 
 Project licensed by MIT. Details in [License file](LICENSE).
