@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.8.0-pl (September 24, 2015)
+========================================
+- Added plugin ms2OrderStatusSlackify for send notifies when order status changed
+
 Slackify 0.7.0-beta (September 24, 2015)
 ========================================
 - Added plugin NewTicketTicketsSlackify for send notifies when new ticket created

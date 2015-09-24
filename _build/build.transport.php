@@ -37,8 +37,8 @@ ini_set('date.timezone', 'Europe/Minsk');
 
 define('PKG_NAME', 'Slackify');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.7.0');
-define('PKG_RELEASE', 'beta');
+define('PKG_VERSION', '0.8.0');
+define('PKG_RELEASE', 'pl');
 
 require_once 'xpdo/xpdo/xpdo.class.php';
 require_once 'xpdo/xpdo/transport/xpdotransport.class.php';
