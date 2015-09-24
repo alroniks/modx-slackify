@@ -175,21 +175,21 @@ switch ($modx->event->name) { // as usual, check event name for run it only for 
 
 ## System settings
 
-- *setting_slackify_entrypoint* – Url to Slack incoming web-hook
-- *setting_slackify_channel* – The default channel that messages will be sent to
-- *setting_slackify_username* – The default username that messages will be sent from. If empty will be used site_name setting
-- *setting_slackify_icon* – The default icon messages will be sent with, either :emoji: or a URL to an image
-- *setting_slackify_link_names* – Whether names like @regan or #accounting should be linked
-- *setting_slackify_unfurl_links* – Whether Slack should unfurl text-based URLs
-- *setting_slackify_unfurl_media* – Whether Slack should unfurl media-based URLs
-- *setting_slackify_allow_markdown* – Whether Markdown should be parsed in messages
-- *setting_slackify_markdown_in_attachments* – Which attachment fields should have Markdown parsed
+- **setting_slackify_entrypoint** – Url to Slack incoming web-hook
+- **setting_slackify_channel** – The default channel that messages will be sent to
+- **setting_slackify_username** – The default username that messages will be sent from. If empty will be used site_name setting
+- **setting_slackify_icon** – The default icon messages will be sent with, either :emoji: or a URL to an image
+- **setting_slackify_link_names** – Whether names like @regan or #accounting should be linked
+- **setting_slackify_unfurl_links** – Whether Slack should unfurl text-based URLs
+- **setting_slackify_unfurl_media** – Whether Slack should unfurl media-based URLs
+- **setting_slackify_allow_markdown** – Whether Markdown should be parsed in messages
+- **setting_slackify_markdown_in_attachments** – Which attachment fields should have Markdown parsed
 
 ## Contributing
 
 If you found an error or strange behavior, please, [send issue](/issues/new) via GitHub.
 
-*Now I added only four plugins as examples, but I wait suggestions from you, for that cases it would be good write plugin with Slack notifies.*
+**Now I added only four plugins as examples, but I wait suggestions from you, for that cases it would be good write plugin with Slack notifies.**
 
 If you familiar with PHP and want suggest an improvement, fill free to send a pull request with your patch.
 
