@@ -113,8 +113,8 @@ $sources = [
 ];
 
 $signature = join('-', [PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE]);
-//$directory = $root . '_packages/';
-$directory = __DIR__ . '/../../../core/packages/'; // local place
+$directory = $root . '_packages/';
+//$directory = __DIR__ . '/../../../core/packages/'; // local place
 $filename = $directory . $signature . '.transport.zip';
 
 if (file_exists($filename)) {
