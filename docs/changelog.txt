@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.7.0-beta (September 24, 2015)
+========================================
+- Added plugin NewTicketTicketsSlackify for send notifies when new ticket created
+
 Slackify 0.6.2-beta (September 24, 2015)
 ========================================
 - Added class Link for generates valid links for Slack

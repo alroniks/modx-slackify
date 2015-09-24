@@ -33,9 +33,15 @@ $list = [
         ]
     ],
     'NewCommentTicketsSlackify' => [
-        'description' => 'This plugin sends messages to defined channel in Slack when somebody add new comment to a ticket.',
+        'description' => 'This plugin sends messages to defined channel in Slack when somebody added new comment to a ticket.',
         'events' => [
             'OnCommentSave'
+        ]
+    ],
+    'NewTicketTicketsSlackify' => [
+        'description' => 'This plugin sens messaged to defined channel in Slack when somebody created new ticket',
+        'events' => [
+            'OnDocFormSave'
         ]
     ]
 ];
