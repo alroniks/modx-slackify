@@ -42,7 +42,7 @@ switch ($modx->event->name) {
         $link = new Link(rtrim(MODX_SITE_URL, '/') . MODX_MANAGER_URL . "index.php?a={$action->get('id')}#&order={$order->get('id')}", $order->get('num'));
         $title = $new
             ? "New order $link was placed on the site"
-            : "Order with $link was updated";
+            : "Order $link was updated";
 
         $a->setTitle(new Title($title));
         $a->addField(new Field('Status', $status->get('name'), true));

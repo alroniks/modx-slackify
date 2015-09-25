@@ -195,14 +195,14 @@ If you found an error or strange behavior, please, [send issue](/issues/new) via
 
 **Now I added only four plugins as examples, but I wait suggestions from you, for that cases it would be good write plugin with Slack notifies.**
 
-If you familiar with PHP and want suggest an improvement, fill free to send a pull request with your patch.
+If you familiar with PHP and want suggest an improvement, feel free to send a pull request with your patch.
 
 Almost at all manuals for creating CMPs build script required installed live MODX site. But I solve this problem.
 For start develop this extra you should clone this repository, install xPDO via git modules and run a build script. It's all.
 
 ```bash
 git clone --recursive git@github.com:Alroniks/modx-slackify.git
-cd _build && php build.tranposrt.php
+cd modx-slackify/_build && php build.transport.php
 ```
 
 After running build script you can see some errors, but it's not important. As we use xPDO without a live connection to the database, errors appear, because we do not use real implementation of classes and tables not exists.
