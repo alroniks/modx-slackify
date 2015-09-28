@@ -1,5 +1,9 @@
 This file shows the changes in recent releases of Slackify.
 
+Slackify 0.8.1-pl (September 28, 2015)
+========================================
+- Fixed error when modx could not load Slackify class as service
+
 Slackify 0.8.0-pl (September 24, 2015)
 ========================================
 - Added plugin ms2OrderStatusSlackify for send notifies when order status changed
