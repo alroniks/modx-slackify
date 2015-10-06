@@ -56,7 +56,7 @@ switch ($modx->event->name) {
             $a->addField(new Field('Delivery cost', $order->get('delivery_cost'), true));
 
             $a->addField(new Field('Payment', $order->getOne('Payment')->get('name'), true));
-            $a->addField(new Field('Weight'), $order->get('weight'));
+            $a->addField(new Field('Weight', $order->get('weight'), true));
 
             $a->setText($order->get('comment'));
         }
