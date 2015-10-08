@@ -8,7 +8,7 @@ Plugin runs only if some event was fired and in other times plugin do nothing. I
 This extra allow create own plugins to MODX and provide clear, powerful and customisable API
 for send any type of messages to Slack channels and users.
 
-Extra will be available in the official repository and in the modstore.pro, but deploy can take some time, so latest versions of package always available in [releases](/releases).
+Extra will be available in the official repository and in the modstore.pro, but deploy can take some time, so latest versions of package always available in [releases](../../releases/latest).
 
 ### Required (Important)
 
