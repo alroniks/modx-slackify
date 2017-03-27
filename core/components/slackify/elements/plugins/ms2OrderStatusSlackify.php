@@ -37,12 +37,8 @@ switch ($modx->event->name) {
         $a->setPretext($new ? 'New order was made on site' : 'Status of order was changed');
         $a->setColor(new Color('#' . $status->get('color'))); // from status
 
-        /** @var modAction $action */
-        $action = $modx->getObject('modAction', ['namespace' => 'minishop2', 'controller' => 'controllers/mgr/orders']);
-        $link = new Link(rtrim(MODX_SITE_URL, '/') . MODX_MANAGER_URL . "index.php?a={$action->get('id')}#&order={$order->get('id')}", $order->get('num'));
-        $title = $new
-            ? "New order $link was placed on the site"
-            : "Order $link was updated";
+        $link = new Link(rtrim(MODX_SITE_URL, '/') . MODX_MANAGER_URL . "index.php?a=mgr/orders&namespace=minishop2#&order={$order->get('id')}", $order->get('num'));
+        $title = $new ? "New order $link was placed on the site" : "Order $link was updated";
 
         $a->setTitle(new Title($title));
         $a->addField(new Field('Status', $status->get('name'), true));
@@ -66,5 +62,5 @@ switch ($modx->event->name) {
 
         $slackify->send($message);
 
-    break;
+        break;
 }
